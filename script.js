@@ -1,3 +1,3 @@
 function greetUser() {
-  alert("Hello Charan! You're officially a JavaScript wizard now 🧙‍♂️⚡");
+  alert("Hello Charan! You clicked the 'Click me' button 🧙‍♂️⚡");
 }
