@@ -1,9 +1,20 @@
 function greetUser() {
-  const name = document.getElementById("username").value;
+  const nameInput = document.getElementById("username");
+  const name = nameInput.value;
 
   if (name.trim() === "") {
-    alert("Hey! Type something before clicking 😅");
-  } else {
-    alert(`Hello ${name}! How's your day 🧙‍♂️⚡`);
+    alert("Please enter a name.");
+    return;
   }
+
+  localStorage.setItem("username", name);
+  alert(`Hello ${name}, welcome back! 🎉`);
 }
+
+// Auto-greet when the page loads
+window.onload = function () {
+  const savedName = localStorage.getItem("username");
+  if (savedName) {
+    document.body.innerHTML = `<h2>Welcome back, ${savedName}! 👋</h2>`;
+  }
+};
