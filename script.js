@@ -1,20 +1,31 @@
-function greetUser() {
-  const nameInput = document.getElementById("username");
-  const name = nameInput.value;
+function sendMessage() {
+  const input = document.getElementById("message-input");
+  const message = input.value.trim();
+  if (!message) return;
 
-  if (name.trim() === "") {
-    alert("Please enter a name.");
-    return;
-  }
+  // Display user's message
+  addMessage(message, "user");
 
-  localStorage.setItem("username", name);
-  alert(`Hello ${name}, welcome back! 🎉`);
+  // Save to local storage
+  let messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
+  messages.push({ text: message, type: "user" });
+  localStorage.setItem("chatMessages", JSON.stringify(messages));
+
+  input.value = "";
 }
 
-// Auto-greet when the page loads
-window.onload = function () {
-  const savedName = localStorage.getItem("username");
-  if (savedName) {
-    document.body.innerHTML = `<h2>Welcome back, ${savedName}! 👋</h2>`;
-  }
+// Render a message on screen
+function addMessage(text, type) {
+  const chatBox = document.getElementById("chat-box");
+  const msgDiv = document.createElement("div");
+  msgDiv.classList.add("message", type);
+  msgDiv.textContent = text;
+  chatBox.appendChild(msgDiv);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// Load previous messages on page load
+window.onload = () => {
+  const messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
+  messages.forEach((msg) => addMessage(msg.text, msg.type));
 };
