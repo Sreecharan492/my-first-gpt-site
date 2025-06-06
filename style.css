@@ -58,3 +58,9 @@ button {
   color: white;
   cursor: pointer;
 }
+.gpt {
+  background: #f8d7da;
+  align-self: flex-start;
+  text-align: left;
+  font-style: italic;
+}
